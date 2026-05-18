@@ -1,0 +1,85 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-image: url("/assets/images/dungeon.jpg");
+	background-size: cover;
+}
+
+.container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.wafaa-image {
+	width: 50px;
+	opacity: 0;
+	transition:
+		transform 0.3s ease,
+		opacity 0.3s ease;
+	transform-origin: center center;
+}
+
+.wafaa-image.found {
+	opacity: 1;
+	animation: found-pop 0.8s ease forwards;
+}
+
+@keyframes found-pop {
+	0% {
+		transform: scale(5) rotateY(0deg);
+	}
+	40% {
+		transform: scale(1.7) rotateY(180deg);
+	}
+	70% {
+		transform: scale(1.4) rotateY(270deg);
+	}
+	100% {
+		transform: scale(1.6) rotateY(360deg);
+	}
+}
+
+.play-button {
+	padding: 14px 28px;
+	font-size: 17px;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	color: #eef9dc;
+	background: linear-gradient(135deg, #3f7b1f 0%);
+	border: 2px solid #85b83d;
+	border-radius: 999px;
+	box-shadow:
+		0 12px 22px rgba(0, 0, 0, 0.24),
+		inset 0 1px 0 rgba(255, 255, 255, 0.18);
+	cursor: pointer;
+	transition:
+		transform 0.2s ease,
+		opacity 0.2s ease,
+		box-shadow 0.2s ease;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+	z-index: 1000;
+}
+
+.play-button:hover {
+	transform: scale(1.05);
+	box-shadow:
+		0 14px 26px rgba(0, 0, 0, 0.28),
+		inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.play-button:active {
+	transform: scale(0.98);
+}
+
+.play-button.hidden {
+	opacity: 0;
+	pointer-events: none;
+	transform: scale(0.8);
+}

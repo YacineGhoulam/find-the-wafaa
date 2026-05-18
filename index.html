@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Find the Wafaa</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<button class="play-button" onclick="playAudio()">
+				Find the goblin
+			</button>
+			<img
+				src="assets/images/wafaa.jpg"
+				alt="wafaa"
+				class="wafaa-image"
+				onclick="wafaaFound()"
+			/>
+		</div>
+	</body>
+
+	<script>
+		function setParams() {
+			const mouseX = event.clientX;
+			const mouseY = event.clientY;
+
+			const imageX = image.offsetLeft + image.offsetWidth / 2;
+			const imageY = image.offsetTop + image.offsetHeight / 2;
+
+			const distance = Math.sqrt(
+				(mouseX - imageX) ** 2 + (mouseY - imageY) ** 2,
+			);
+
+			const maxDistance =
+				Math.sqrt(
+					window.innerWidth ** 2 + window.innerHeight ** 2,
+				) * 0.6;
+
+			audio.volume = Math.max(
+				0.1,
+				1 - 5 * (distance / maxDistance),
+			);
+			console.log(
+				`Distance: ${distance.toFixed(2)}, Volume: ${audio.volume.toFixed(2)}`,
+			);
+		}
+
+		function wafaaFound() {
+			let image = document.querySelector(".wafaa-image");
+			image.style.opacity = 1;
+			image.classList.add("found");
+			audio.pause();
+		}
+		var audio = new Audio("assets/audio/goblin.mp3");
+		audio.loop = true;
+
+		const image = document.querySelector(".wafaa-image");
+
+		// Place image randomly
+		image.style.position = "absolute";
+		image.style.top = `${Math.random() * 80}%`;
+		image.style.left = `${Math.random() * 80}%`;
+
+		let audioStarted = false;
+
+		function playAudio() {
+			if (!audioStarted) {
+				setParams();
+				audio.play();
+
+				audioStarted = true;
+				const button = document.querySelector(".play-button");
+				button.classList.add("hidden");
+			}
+		}
+
+		// Continuously update volume based on mouse distance
+		document.addEventListener("mousemove", (event) => {
+			setParams();
+		});
+	</script>
+</html>
