@@ -5,7 +5,7 @@
 }
 
 body {
-	background-image: url("/assets/images/dungeon.jpg");
+	background-image: url("assets/images/dungeon.jpg");
 	background-size: cover;
 }
 
